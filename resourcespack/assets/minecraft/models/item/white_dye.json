@@ -1,0 +1,270 @@
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "item/white_dye"
+	},
+	"overrides": [
+		{
+			"predicate": {
+				"custom_model_data": 1
+			},
+			"model": "minecraft:earth/bone41"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 2
+			},
+			"model": "minecraft:earth/bone"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 3
+			},
+			"model": "minecraft:earth/bone2"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 4
+			},
+			"model": "minecraft:earth/bone3"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 5
+			},
+			"model": "minecraft:earth/bone4"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 6
+			},
+			"model": "minecraft:earth/bone5"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 7
+			},
+			"model": "minecraft:earth/bone6"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 8
+			},
+			"model": "minecraft:earth/bone7"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 9
+			},
+			"model": "minecraft:earth/bone8"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 10
+			},
+			"model": "minecraft:earth/bone9"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 11
+			},
+			"model": "minecraft:earth/bone10"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 12
+			},
+			"model": "minecraft:earth/bone11"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 13
+			},
+			"model": "minecraft:earth/bone12"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 14
+			},
+			"model": "minecraft:earth/bone13"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 15
+			},
+			"model": "minecraft:earth/bone14"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 16
+			},
+			"model": "minecraft:earth/bone15"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 17
+			},
+			"model": "minecraft:earth/bone16"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 18
+			},
+			"model": "minecraft:earth/bone17"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 19
+			},
+			"model": "minecraft:earth/bone18"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 20
+			},
+			"model": "minecraft:earth/bone19"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 21
+			},
+			"model": "minecraft:earth/bone20"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 22
+			},
+			"model": "minecraft:earth/bone21"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 23
+			},
+			"model": "minecraft:earth/bone22"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 24
+			},
+			"model": "minecraft:earth/bone23"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 25
+			},
+			"model": "minecraft:earth/bone24"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 26
+			},
+			"model": "minecraft:earth/bone25"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 27
+			},
+			"model": "minecraft:earth/bone26"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 28
+			},
+			"model": "minecraft:earth/bone27"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 29
+			},
+			"model": "minecraft:earth/bone28"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 30
+			},
+			"model": "minecraft:earth/bone29"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 31
+			},
+			"model": "minecraft:earth/bone30"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 32
+			},
+			"model": "minecraft:earth/bone31"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 33
+			},
+			"model": "minecraft:earth/bone32"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 34
+			},
+			"model": "minecraft:earth/bone33"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 35
+			},
+			"model": "minecraft:earth/bone34"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 36
+			},
+			"model": "minecraft:earth/bone35"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 37
+			},
+			"model": "minecraft:earth/bone36"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 38
+			},
+			"model": "minecraft:earth/bone37"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 39
+			},
+			"model": "minecraft:earth/bone38"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 40
+			},
+			"model": "minecraft:earth/bone39"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 41
+			},
+			"model": "minecraft:earth/bone40"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 42
+			},
+			"model": "minecraft:earth/bone42"
+		}
+	],
+	"aj": {
+		"includedRigs": {
+			"ed723b93-5373-9bbd-8667-8e18e21dc735": {
+				"name": "pa_earth",
+				"usedIDs": [
+					[1, 42]
+				]
+			}
+		}
+	}
+}

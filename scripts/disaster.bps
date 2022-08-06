@@ -1,0 +1,91 @@
+package disaster
+
+def summonPoint(){
+    /summon marker ~ ~ ~ {Tags:["dontKill","disaster"]}
+}
+
+process disaster{
+    int tick
+    def main(){
+        tick ++
+        if (tick % 30 == 0){
+            with(@r[gamemode=adventure],true){
+                kill(@e[type=fireball])
+                with(@e[tag=disaster,limit=1,sort=random,distance=..50],true){
+                    switch(lcg.range(0,10)){
+                        0 -> /summon lightning_bolt
+                        1..10 -> /summon minecraft:fireball ~ ~20 ~ {Motion:[0.0,-5.0,0.0],ExplosionPower:0}
+                    }
+                }
+            }
+        }
+    }
+}
+
+jsonfile worldgen/biome/death{
+    "temperature": 0.8,
+    "downfall": 0.4,
+    "precipitation": "rain",
+    "category": "plains",
+    "effects": {
+        "sky_color": 16757294,
+        "fog_color": 16762183,
+        "water_color": 14997055,
+        "water_fog_color": 3355141,
+        "grass_color": 7897638,
+        "foliage_color": 6521132,
+        "particle": {
+            "options": {
+                "type": "crimson_spore"
+            },
+            "probability": 0.01
+        }
+    },
+    "spawners": {},
+    "spawn_costs": {},
+    "carvers": {},
+    "features": []
+}
+
+
+jsonfile worldgen/biome/sky_death{
+    "temperature": 0.8,
+    "downfall": 0.4,
+    "precipitation": "rain",
+    "category": "plains",
+    "effects": {
+        "sky_color": 0,
+        "fog_color": 0,
+        "water_color": 4159204,
+        "water_fog_color": 329011,
+        "particle": {
+            "options": {
+                "type": "white_ash"
+            },
+            "probability": 0.01
+        }
+    },
+    "spawners": {},
+    "spawn_costs": {},
+    "carvers": {},
+    "features": []
+}
+
+
+jsonfile worldgen/biome/void{
+    "temperature": 0.8,
+    "downfall": 0.4,
+    "precipitation": "rain",
+    "category": "plains",
+    "effects": {
+        "sky_color": 0,
+        "fog_color": 0,
+        "water_color": 4159204,
+        "water_fog_color": 329011
+    },
+    "spawners": {},
+    "spawn_costs": {},
+    "carvers": {},
+    "features": []
+}
+

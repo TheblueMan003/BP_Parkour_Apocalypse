@@ -1,0 +1,158 @@
+package intro_3
+
+npc blue, blake
+
+def stop(){
+    blue,blake = null
+}
+
+def initCharacter(){
+    positioned(-85 243 -284){
+        blue = npc(netherite_ingot)
+        blue.disableoptimization()
+        blue.setanimation{
+            /tp @s ~ ~ ~ 180 0
+            tag(blue)
+            blue.update()
+        }
+    }
+    positioned(-85 243 -288){
+        blake = npc(netherite_scrap)
+        blake.disableoptimization()
+        blake.setanimation{
+            /tp @s ~ ~ ~ 0 0
+            tag(blake)
+            blake.update()
+        }
+    }
+}
+def @reset reset(){
+    /function pa_eject:remove/all
+    beacon.create.stop()
+    beacon.animate.stop()
+    main.stop()
+    
+    positioned(-88 242 -295){
+        structure("room_floor_0")
+    }
+}
+def phase3(){
+    blue.setanimation{
+        facing(@e[tag=blake]){
+            /tp @s ~ ~ ~ ~ ~
+        }
+        INT tick
+        tick++
+        if (tick == 20){
+            blue.setanimations(animationset.talking())
+        }
+        blue.update()
+    }
+    blake.setanimation{
+        facing(@e[tag=blue]){
+            /tp @s ~ ~ ~ ~ ~
+        }
+        blake.update()
+    }
+}
+def phase2(){
+    beacon.create.start()
+    schedule.add(20){
+        beacon.animate.start()
+    }
+    sound.playallat(sfx.earth_shockwave)
+    schedule.add(5){
+        positioned(-88 242 -295){
+            structure("room_floor_1")
+        }
+        fade.towhiteforall(2,0,2)
+        positioned(-85 243 -288){
+            facing(-86 243 -288){
+                /function pa_eject:summon/blake
+            }
+        }
+        positioned(-85 243 -284){
+            facing(-86 243 -284){
+                /function pa_eject:summon/blue
+            }
+        }
+        with(@e[tag=character]){
+            /function pa_eject:animations/animation.ejected/play
+        }
+        blue,blake = null
+    }
+    schedule.add(60){
+        /function pa_eject:remove/all
+        positioned(-88,243,-284){
+            blue = npc(netherite_ingot)
+            blue.disableoptimization()
+            blue.setanimations(animationset.dirty())
+            blue.setanimation{
+                /tp @s ~ ~ ~ 90 0
+                tag(blue)
+                blue.update()
+            }
+        }
+        positioned(-88,243,-288){
+            blake = npc(netherite_scrap)
+            blake.disableoptimization()
+            blake.setanimation{
+                /tp @s ~ ~ ~ -90 0
+                tag(blake)
+                blake.update()
+            }
+        }
+        with(@a,true){
+            dialog.show(intro_25, 3, pass){
+                main.stop()
+                stop()
+            }
+        }
+    }
+}
+
+def start(){
+    forceload(-74,242,-293,-93,242,-280)
+    fade.toblackforallandthen(10,20,10){
+        /tp @a -91 243 -286
+        chunk.waitforall((-74,242,-293),(-93,242,-280)){
+            initCharacter()
+            main.start()
+            positioned(-88 242 -295){
+                structure("room_floor_0")
+            }
+            schedule.add(30){
+                with(@a,true){
+                    dialog.show(intro_20, 4, pass){
+                        phase2()
+                    }
+                }
+            }
+        }
+    }
+}
+process main{
+    def main(){
+        with(@a[tag=cutscene]){
+            /spectate @e[tag=rftc.cam,limit=1] @s
+        }
+        /function pa_eject:animation_loop
+    }
+    def onStop(){
+        kill(@e[tag=rftc.cam])
+        forceunload(-74,242,-293,-93,242,-280)
+        with(@a,true){
+            /execute in minecraft:overworld run tp @s -98.43 243.00 -285.44 -269.22 4.46
+            gamemode(adventure)
+            untag(cutscene)
+            parkour.start()
+        }
+    }
+    def onStart(){
+        /summon armor_stand -91 245 -286 {Tags:["rftc.cam"],NoGravity:1,Marker:1,Rotation:[-90f,0f]}
+        with(@a,true){
+            tag(@s,cutscene)
+            gamemode(spectator)
+        }
+    }
+}

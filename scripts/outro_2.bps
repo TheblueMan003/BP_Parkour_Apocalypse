@@ -1,0 +1,152 @@
+package outro_2
+
+npc red, orange, yellow, green, aqua, purple
+npc sciguy
+
+def summonCouncil(){
+    positioned(939,94,814){
+        purple = npc(gold_ingot)
+    }
+    positioned(937,96,818){
+        aqua = npc(raw_gold)
+    }
+    positioned(948,93,818){
+        yellow = npc(charcoal)
+    }
+    positioned(937,95,816){
+        red = npc(raw_iron)
+    }
+    positioned(937,95,820){
+        green = npc(iron_ingot)
+    }
+    positioned(939,94,822){
+        orange = npc(copper_ingot)
+    }
+    positioned(952,92,822){
+        sciguy = npc(stick)
+    }
+    red.disableoptimization()
+    orange.disableoptimization()
+    yellow.disableoptimization()
+    green.disableoptimization()
+    aqua.disableoptimization()
+    purple.disableoptimization()
+    
+    purple.setAnimation(){
+        facing(949,93,818){
+            /tp @s ~ ~ ~ ~ 0
+        }
+        purple.update()
+    }
+    aqua.setAnimation(){
+        facing(949,93,818){
+            /tp @s ~ ~ ~ ~ 0
+        }
+        aqua.update()
+    }
+    yellow.setAnimation(){
+        facing(944,92,818){
+            /tp @s ~ ~ ~ ~ 0
+        }
+        yellow.update()
+    }
+    red.setAnimation(){
+        facing(949,93,818){
+            /tp @s ~ ~ ~ ~ 0
+        }
+        red.update()
+    }
+    green.setAnimation(){
+        facing(949,93,818){
+            /tp @s ~ ~ ~ ~ 0
+        }
+        green.update()
+    }
+    orange.setAnimation(){
+        facing(949,93,818){
+            /tp @s ~ ~ ~ ~ 0
+        }
+        orange.update()
+    }
+    sciguy.setanimation{
+        /tp @s ~ ~ ~ 90 0
+        sciguy.update()
+    }
+    /summon armor_stand 932 100 818 {Tags:["rftc.cam"],NoGravity:1,Marker:1,Rotation:[-90f,20f]}
+}
+def phone(){
+    with(@a[tag=cutscene,tag=outro],true){
+        sound.play(sfx.phone)
+    }
+}
+def screen(){
+    positioned(950 94 822){
+        entity.summon(armor_stand,{Invisible:1,Marker:1,Tags:["pa.screen"],Rotation:[-90f,0f]}){
+            armor_stand.setmodel(scute,12)
+        }
+    }
+    positioned(951 94 825){
+        entity.summon(armor_stand,{Invisible:1,Marker:1,Tags:["pa.screen"],Rotation:[-135f,0f]}){
+            armor_stand.setmodel(scute,12)
+        }
+    }
+    positioned(951 94 819){
+        entity.summon(armor_stand,{Invisible:1,Marker:1,Tags:["pa.screen"],Rotation:[-45f,0f]}){
+            armor_stand.setmodel(scute,12)
+        }
+    }
+}
+def killCouncil(){
+    red, orange, yellow, green, aqua, purple, sciguy = null
+}
+
+def start(){
+    with(@a[tag=cutscene,tag=outro]){
+        fade.toblackandthen(20,10,10){
+            chunk.waitforall((935,94,812),(969,91,823)){
+                schedule.add(40){
+                    main.start()
+                    summonCouncil()
+                    with(@a[tag=cutscene,tag=outro]){
+                        /tp @s 932.50 100.00 818.50 -90.00 20.00
+                        dialog.show(outro_10,6,pass){
+                            phone()
+                            yellow.setanimation(animationset.idle())
+                            schedule.add(40){
+                                with(@a[tag=cutscene,tag=outro]){
+                                    dialog.show(outro_17,10,pass){
+                                        main.stop()
+                                        killCouncil()
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    forceload(935,94,812,969,91,823)
+}
+
+process main{
+    def main(){
+        with(@a[tag=cutscene,gamemode=spectator,tag=outro]){
+            /spectate @e[tag=rftc.cam,limit=1] @s
+        }
+    }
+    def onStop(){
+        kill(@e[tag=rftc.cam])
+        kill(@e[tag=pa.screen])
+        forceunload(935,94,812,969,91,823)
+        untag(@a[tag=outro],endcutscene)
+        untag(@a[tag=outro],outro)
+        recap.show_recap()
+    }
+    def onStart(){
+        with(@a[tag=endcutscene,tag=outro],true){
+            tag(@s,cutscene)
+            gamemode(spectator)
+        }
+    }
+}

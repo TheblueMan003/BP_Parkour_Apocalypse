@@ -1,0 +1,37 @@
+model.npc.new(coal, "custom/skin1")
+model.npc.new(charcoal, "custom/skin2")
+model.npc.new(iron_ingot, "custom/skin3")
+model.npc.new(raw_iron, "custom/skin4")
+model.npc.new(gold_ingot, "custom/skin5")
+model.npc.new(raw_gold, "custom/skin6")
+model.npc.new(copper_ingot, "custom/skin7")
+model.npc.new(raw_copper, "custom/skin8")
+model.npc.new(stick, "custom/skin9")
+model.npc.new(netherite_ingot, "custom/blue_void")
+model.npc.new(netherite_scrap, "custom/wizard")
+model.npc.new(netherite_sword, "custom/wizard_alt")
+model.npc.new(netherite_pickaxe, "custom/blue_void")
+
+models.item.flat(respawn,"item/clock_00")
+models.item.flat(reset,"item/oak_door")
+models.item.flat(music,"item/music")
+models.item.new(carrot_on_a_stick, ("item/reset",1), ("item/respawn",2), ("item/music",3))
+
+models.item.new(bowl,("custom/crown",1))
+
+
+models.item.new(diamond_hoe,
+("custom/player_idle",1),("custom/player_walk_0",2),("custom/player_walk_1",3),("custom/player_walk_2",4),("custom/player_walk_3",4),
+("custom/player_idle_inv",11),("custom/player_walk_0_inv",12),("custom/player_walk_1_inv",13),("custom/player_walk_2_inv",4),("custom/player_walk_3_inv",14)
+)
+
+
+models.item.new(scute,
+("custom/shockwave_0",1),("custom/shockwave_1",2),("custom/shockwave_2",3),
+("custom/shockwave_3",4),("custom/shockwave_4",5),("custom/shockwave_5",6),
+
+("custom/screen_default",10),("custom/screen_target",11),("custom/screen_warning",12),
+("custom/beacon",20),("custom/beacon_outline",21),
+("custom/fan",50)
+)
+

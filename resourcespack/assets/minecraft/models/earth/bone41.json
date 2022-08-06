@@ -1,0 +1,28 @@
+{
+	"__credit": "Generated using Animated Java (https://animated-java.dev/)",
+	"textures": {
+		"0": "minecraft:custom/earth"
+	},
+	"elements": [
+		{
+			"faces": {
+				"north": {"uv": [2, 0, 3.75, 1.75], "texture": "#0"},
+				"east": {"uv": [2, 1.75, 3.75, 3.5], "texture": "#0"},
+				"south": {"uv": [2, 3.5, 3.75, 5.25], "texture": "#0"},
+				"west": {"uv": [3.75, 0, 5.5, 1.75], "texture": "#0"},
+				"up": {"uv": [5.5, 3.5, 3.75, 1.75], "texture": "#0"},
+				"down": {"uv": [5.5, 3.5, 3.75, 5.25], "texture": "#0"}
+			},
+			"to": [11.3, 11.5, 18.9],
+			"from": [4.7, 4.9, 12.3],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 5, 8]}
+		}
+	],
+	"display": {
+		"head": {
+			"translation": [0, 5.6, 0],
+			"scale": [4, 4, 4],
+			"rotation": [0, 0, 0]
+		}
+	}
+}

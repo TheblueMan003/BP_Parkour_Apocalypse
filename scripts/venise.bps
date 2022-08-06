@@ -1,0 +1,36 @@
+package venise
+
+level venise{
+    def playertick(){
+        if (block(~ ~-1 ~ #{polished_andesite,sandstone,sandstone_wall,birch_fence,birch_fence_gate,birch_planks,andesite_slab,magma_block,smooth_sandstone_slab})){
+            parkour.die()
+        }
+    }
+    def oninit(){
+        setup(986,65,10,1574,106,-15)
+    }
+}
+
+level cave{
+    def playertick(){
+        if (block(~ ~-1 ~ #{gray_concrete,white_concrete,white_wool,polished_blackstone_bricks,cracked_polished_blackstone_bricks,stone,cobblestone,mossy_cobblestone,magma_block,andesite})){
+            parkour.die()
+        }
+    }
+    def oninit(){
+        setup(1531,60,307,1553,-60,-13)
+    }
+}
+
+
+
+level london{
+    def playertick(){
+        if (block(~ ~-1 ~ #{chiseled_quartz_block,smooth_quartz_slab,smooth_quartz,azalea_leaves})){
+            parkour.die()
+        }
+    }
+    def oninit(){
+        setup(1301,58,247,2070,113,308)
+    }
+}

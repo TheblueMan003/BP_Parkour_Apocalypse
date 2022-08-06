@@ -1,0 +1,36 @@
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "item/orange_dye"
+	},
+	"overrides": [
+		{
+			"predicate": {
+				"custom_model_data": 1
+			},
+			"model": "minecraft:box/body"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 2
+			},
+			"model": "minecraft:box/bone"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 3
+			},
+			"model": "minecraft:box/bone2"
+		}
+	],
+	"aj": {
+		"includedRigs": {
+			"00d152e9-b83f-6517-8093-ff4aaaeb01cc": {
+				"name": "lazer_box",
+				"usedIDs": [
+					[1, 3]
+				]
+			}
+		}
+	}
+}

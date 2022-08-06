@@ -1,0 +1,162 @@
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "item/yellow_dye"
+	},
+	"overrides": [
+		{
+			"predicate": {
+				"custom_model_data": 1
+			},
+			"model": "minecraft:eject/body"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 2
+			},
+			"model": "minecraft:eject/head"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 3
+			},
+			"model": "minecraft:eject/leftarm"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 4
+			},
+			"model": "minecraft:eject/rightarm"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 5
+			},
+			"model": "minecraft:eject/rightleg"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 6
+			},
+			"model": "minecraft:eject/leftleg"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 7
+			},
+			"model": "minecraft:eject/blake/body"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 8
+			},
+			"model": "minecraft:eject/blake/head"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 9
+			},
+			"model": "minecraft:eject/blake/leftarm"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 10
+			},
+			"model": "minecraft:eject/blake/rightarm"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 11
+			},
+			"model": "minecraft:eject/blake/rightleg"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 12
+			},
+			"model": "minecraft:eject/blake/leftleg"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 13
+			},
+			"model": "minecraft:eject/blue_alt/body"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 14
+			},
+			"model": "minecraft:eject/blue_alt/head"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 15
+			},
+			"model": "minecraft:eject/blue_alt/leftarm"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 16
+			},
+			"model": "minecraft:eject/blue_alt/rightarm"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 17
+			},
+			"model": "minecraft:eject/blue_alt/rightleg"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 18
+			},
+			"model": "minecraft:eject/blue_alt/leftleg"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 19
+			},
+			"model": "minecraft:eject/blake_alt/body"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 20
+			},
+			"model": "minecraft:eject/blake_alt/head"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 21
+			},
+			"model": "minecraft:eject/blake_alt/leftarm"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 22
+			},
+			"model": "minecraft:eject/blake_alt/rightarm"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 23
+			},
+			"model": "minecraft:eject/blake_alt/rightleg"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 24
+			},
+			"model": "minecraft:eject/blake_alt/leftleg"
+		}
+	],
+	"aj": {
+		"includedRigs": {
+			"93fd5d6f-9029-8718-b285-52b87f949e06": {
+				"name": "pa_eject",
+				"usedIDs": [
+					[1, 24]
+				]
+			}
+		}
+	}
+}

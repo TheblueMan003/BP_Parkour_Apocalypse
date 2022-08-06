@@ -1,0 +1,26 @@
+package shader
+
+def apply(){
+    spawnpoint()
+    /summon creeper
+    gamemode(spectator)
+    /spectate @e[type=creeper,limit=1] @s
+    schedule.add(10){
+        with(@a[tag=shader]){
+            /kill @s
+        }
+    }
+    tag(@s,shader)
+    tag(@s,cutscene)
+    schedule.add(15){
+        with(@a[tag=shader]){
+            gamemode(@a[tag=shader],adventure)
+            untag(shader)
+            untag(cutscene)
+        }
+        with(@e[type=creeper],true){
+            /tp @s ~ -200 ~
+            /kill @e[type=creeper]
+        }
+    }
+}

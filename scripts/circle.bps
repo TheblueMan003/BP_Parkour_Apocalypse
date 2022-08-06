@@ -1,0 +1,91 @@
+package circle
+
+
+cprocess box{
+    INT Tick
+    INT Radius
+    def main(){
+        with(@e[tag=laserbox],true){
+            Tick++
+            int sub = Tick % 60
+            if (sub == 10){
+                /function lazer_box:animations/animation.wave.boxlaser/play
+            }
+            if (sub == 50){
+                circle()
+            }
+        }
+        with(@e[tag=circle_center,type=marker],true){
+            switch(Radius){
+                forgenerate($i,0,30){
+                    case($i){
+                        repeat(60){
+                            with(@s,true){
+                                positioned(^ ^ ^$eval($i/4)){
+                                    /particle minecraft:dust_color_transition 1 0 0 1 1 1 0 ~ ~ ~
+                                }
+                                /tp @s ~ ~ ~ ~6 ~
+                            }
+                        }
+                        float y = @s.y
+                        if ($i > 1){
+                            with(@a[distance=$eval($i/4-0.5)..$eval($i/4+0.5)],true){
+                                float sy = @s.y
+                                if (sy > y - 0.25 && sy < y + 0.25){
+                                    parkour.die()
+                                    sound.play(minecraft:entity.generic.death,10,1)
+                                    particles.sphere(minecraft:flame,1,0.1,20)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            Radius+=1
+            if (Radius > 30){
+                kill()
+            }
+        }
+        /function lazer_box:animation_loop
+    }
+}
+
+def summon(){
+    aligned{
+        setblock(barrier)
+        facing(~ ~ ~1){
+            /function lazer_box:summon/default
+        }
+        box.start()
+    }
+}
+lazy summon(int $x, int $y, int $z){
+    positioned($x $y $z){
+        summon()
+    }
+}
+lazy summon(int $x, int $y, int $z, int $shift){
+    positioned($x $y $z){
+        summon()
+        with(@e[tag=laserbox,distance=..1]){
+            box.Tick = $shift
+        }
+    }
+}
+lazy addtag(int $tag){
+    with(@e[tag=laserbox,tag=!lbs]){
+        tag(lbs)
+        tag($tag)
+    }
+}
+lazy remove(int $tag){
+    with(@e[tag=$tag,tag=laserbox]){
+        box.stop()
+        /function lazer_box:remove/this
+    }
+}
+
+def circle(){
+    pointer.new("circle_center")
+    sound.playall(sfx.earth_shockwave,0.25,2)
+}

@@ -1,0 +1,167 @@
+package lab
+
+level l0{
+    def oninit(){
+        setup(-165,248,-251,-153,242,-289)
+    }
+    def playertick(){
+        if (block(~ ~-1 ~ #{gray_concrete,light_gray_concrete,magma_block,cobbled_deepslate,polished_andesite,light_gray_wool})){
+            parkour.die()
+        }
+    }
+    def onstop(){
+        beacon.animate.stop()
+    }
+}
+
+def fakeexplosion(){
+    /particle minecraft:explosion_emitter ~ ~ ~ 1 1 1 1 1 force
+    sound.playall(minecraft:entity.generic.explode,10,1)
+    kill(@a[distance=..4])
+}
+lazy eventGrp(int $d, void=>void $e){
+    bool lock:=false
+    if (!lock){
+        lock = true
+        $e()
+        schedule.add($d){
+            lock = false
+        }
+    }
+}
+lazy event(int $x, int $y, int $z, int $t,void=>void $e){
+    schedule.add($t){
+        positioned($x $y $z){
+            $e()
+        }
+    }
+}
+lazy area(int $x1, int $y1, int $z1, int $x2, int $y2, int $z2, void=>void $f){
+    room rm = room($x1, $y1, $z1, $x2, $y2, $z2)
+    rm.onEnter($f)
+}
+area(-313,137,-80,-180,193,144){
+    event(-259,188,1,20,fakeexplosion)
+    event(-207,169,52,40,fakeexplosion)
+    event(-251,155,105,60,fakeexplosion)
+    event(-238,150,161,80,fakeexplosion)
+    event(-187,140,166,100,fakeexplosion)
+    
+    area.rocketgive.start()
+    music.playelytra()
+}
+
+area(-169,196,263,298,67,183){
+    event(-107,144,248,20,fakeexplosion)
+    event(-35,119,248,30,fakeexplosion)
+    event(-24,136,208,40,fakeexplosion)
+    event(22,115,236,60,fakeexplosion)
+    event(64,98,183,70,fakeexplosion)
+    event(65,107,210,80,fakeexplosion)
+    
+    event(114,108,249,90,fakeexplosion)
+    
+    event(79,107,223,100,fakeexplosion)
+    
+    event(123,102,227,110,fakeexplosion)
+    
+    event(114,108,249,120,fakeexplosion)
+    
+    
+    event(161,95,210,130,fakeexplosion)
+    event(154,113,229,160,fakeexplosion)
+    event(188,90,246,180,fakeexplosion)
+    
+    event(89,115,210,90,fakeexplosion)
+    event(34,128,187,50,fakeexplosion)
+    
+    /fill 111 90 220 97 89 234 air replace minecraft:waxed_oxidized_copper
+    /fill 111 90 220 97 89 234 air replace minecraft:waxed_exposed_copper
+    /fill 111 90 220 97 89 234 air replace minecraft:waxed_weathered_copper
+    positioned(99,91,216){
+        structure("pipe_fix")
+    }
+}
+area(70,147,181,120,74,273){
+    event(105,115,224,1,fakeexplosion)
+    event(99,115,221,1){
+        fallstructure("pipe_break")
+    }
+}
+def lazy fallstructure(int $s){
+    forgenerate($i, structure($s)){
+        positioned(~$i.x ~$i.y ~$i.z){
+            falling_block.summon("$i.id",$i.properties)
+            setblock(air)
+        }
+    }
+}
+def reset(){
+    /fill 111 90 220 97 89 234 air replace minecraft:waxed_oxidized_copper
+    /fill 111 90 220 97 89 234 air replace minecraft:waxed_exposed_copper
+    /fill 111 90 220 97 89 234 air replace minecraft:waxed_weathered_copper
+    positioned(99,91,216){
+        structure("pipe_fix")
+    }
+    positioned(160,72,98){
+        structure("bridge_fix")
+    }
+}
+
+area(275,155,162,-24,52,-14){
+    positioned(160,72,98){
+        structure("bridge_fix")
+    }
+    event(160,98,103,40){
+        fallstructure("bridge_break")
+    }
+    event(166,100,108,40,fakeexplosion)
+    event(236,107,131,10,fakeexplosion)
+    event(214,102,125,20,fakeexplosion)
+    event(199,96,88,40,fakeexplosion)
+    event(152,86,121,50,fakeexplosion)
+    event(95,111,94,70,fakeexplosion)
+    event(63,93,115,90,fakeexplosion)
+    event(27,119,78,120,fakeexplosion)
+    event(40,103,70,140,fakeexplosion)
+    event(87,88,67,150,fakeexplosion)
+    event(129,73,8,160,fakeexplosion)
+    event(159,86,34,170,fakeexplosion)
+}
+
+area(250,107,5,-4,2,-310){
+    event(226,77,-56,10,fakeexplosion)
+    event(198,61,-80,20,fakeexplosion)
+    event(218,49,-110,30,fakeexplosion)
+    event(218,64,-125,40,fakeexplosion)
+    event(186,40,-119,50,fakeexplosion)
+    event(180,53,-140,60,fakeexplosion)
+    event(158,46,-157,65,fakeexplosion)
+    event(142,37,-131,70,fakeexplosion)
+    event(119,55,-155,75,fakeexplosion)
+    event(51,31,-128,90,fakeexplosion)
+    event(48,20,-163,100,fakeexplosion)
+    
+    
+    event(20,25,-170,120,fakeexplosion)
+    event(12,41,-183,140,fakeexplosion)
+    event(44,24,-203,155,fakeexplosion)
+    event(22,13,-235,160,fakeexplosion)
+    event(69,38,-248,170,fakeexplosion)
+}
+
+
+area(-175,238,-98,-58,117,161){
+    event(-150,204,-68,10,fakeexplosion)
+    event(-126,180,-27,30,fakeexplosion)
+    event(-148,166,22,50,fakeexplosion)
+    event(-109,151,57,70,fakeexplosion)
+    event(-116,164,84,90,fakeexplosion)
+    
+    event(-90,149,119,100,fakeexplosion)
+    event(-106,140,131,110,fakeexplosion)
+    event(-83,133,148,120,fakeexplosion)
+    
+    area.rocketgive.start()
+    music.playelytra()
+}

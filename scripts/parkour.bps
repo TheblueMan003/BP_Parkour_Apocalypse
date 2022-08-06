@@ -1,0 +1,182 @@
+package parkour
+
+blocktags fast_snake = red_glazed_terracotta
+
+TIMER Time
+BOOL Started
+INT Level
+bool NoCutscene := false
+INT unsafe
+def start(){
+    /execute in minecraft:overworld run tp @s -98.59 243.00 -285.38 449.69 4.63
+    checkpoint.start()
+    timerStart()
+}
+def end(){
+    timerEnd()
+    /execute in minecraft:overworld run tp @s -14.46 0.00 5.23 179.53 -1.22
+    gamemode(adventure)
+    spawnpoint()
+}
+
+def timerEnd(){
+    if (Started){
+        Time.stop()
+        Started = false
+        speedrun.stop(Level, Time.gettime())
+        title(@s,title,"Congratulation!")
+        title(@s,subtitle,"You beat the map.")
+        NoCutscene = true
+    }
+}
+def submit(){
+    if(!@s[tag=Cheat]){
+        /function parkour:leaderboard/submit
+    }
+}
+
+def timerStart(){
+    if (!Started){
+        parkour_spawnpoint.reset()
+        checkpoint.start()
+        Time = timer()
+        Time.showDeath()
+        Time.showLevel()
+        Time.setLevel(1)
+        Time.setMaxLevel(49)
+        Time.setDisplay(true)
+        Time.start()
+        Time.pause()
+        Started = true
+        speedrun.start()
+        elytra.rm_elytra()
+        Level = 1
+        language.printd(particles)
+    }
+}
+def timerhide(){
+    Time.setdisplay(false)
+}
+def timershow(){
+    Time.setdisplay(true)
+}
+def reset(){
+    Started = false
+    Time.setDisplay(false)
+    start()
+}
+INT LevelStartTime
+INT RealTime
+INT ConfirmTick
+checkpoint.oncheckpoint{
+    Level++
+    speedrun.step(Level, Time.gettime())
+    elytra.rm_elytra()
+    clear(firework_rocket)
+    unsafe = 0
+    
+    int delta = parkour.Time.getTime()
+    delta -= LevelStartTime
+    RealTime += delta
+}
+checkpoint.onleave{
+    LevelStartTime = parkour.Time.getTime()
+    
+    Time.continue()
+    if (elytra.Elytra){
+        music.playelytra()
+        unsafe = 1
+    }
+}
+BOOL Dead
+def die(){
+    if (@s[gamemode=adventure] && Started && !Dead){
+        parkour_spawnpoint.respawn()
+        Time.addDeath()
+        Dead = true
+        clear(firework_rocket)
+    }
+}
+blocktags death{
+    barrier,
+    lava,
+    grass_block
+}
+def @playertick(){
+    Dead = false
+    if (entity.survival()){
+        gamemode(adventure)
+    }
+    if (entity.adventure() && Started){
+        inventory.setslot(hotbar.8,carrot_on_a_stick{CustomModelData:1,display:{Name:'[{"text":"Restart","italic":false,"color":"red"}]',Lore:['[{"text":"Click to restart the map.","italic":false,"color":"yellow"}]']}})
+        inventory.setslot(hotbar.7,carrot_on_a_stick{CustomModelData:2,display:{Name:'[{"text":"Go back to Checkpoint","italic":false,"color":"red"}]',Lore:['[{"text":"Click to go back to the checkpoint.","italic":false,"color":"yellow"}]']}})
+        inventory.setslot(hotbar.4,carrot_on_a_stick{CustomModelData:3,display:{Name:'[{"text":"Music","italic":false,"color":"red"}]',Lore:['[{"text":"Click to toogle the music.","italic":false,"color":"yellow"}]']}})
+    }
+    if (block(lava)){
+        die()
+    }
+    if (unsafe){
+        unsafe++
+        if (unsafe > 20){
+            if (@s[nbt={OnGround:1b}]){
+                unsafe = false
+                sound.playall(minecraft:entity.generic.explode)
+                particles.sphere(minecraft:explosion, 1, 1, 30)
+                die()
+            }
+        }
+    }
+    if (Started){
+        input.onclick{
+            int slot = @s.slot
+            if (slot == 7){
+                die()
+            }
+            if (slot == 8){
+                ConfirmTick:=0
+                if (ConfirmTick > 0){
+                    reset()
+                    ConfirmTick = 0
+                }
+                else{
+                    tellraw(@s,("Click again to confirm",red))
+                    ConfirmTick = 300
+                }
+            }
+            if (slot == 4){
+                music.toggleplayer()
+            }
+        }
+    }
+    if (Level > 0 && Level < 15){
+        /fill ~-2 ~-2 ~-2 ~2 ~2 ~2 air replace fire
+    }
+    if (@s[gamemode=creative]){
+        tag(@a,Cheat)
+        Time.showCheat()
+    }
+    if (@s[gamemode=spectator,tag=!intro,tag=!cutscene]){
+        tag(@a,Cheat)
+        Time.showCheat()
+    }
+    Time.setLevel(Level)
+    Time.tick()
+    
+    if (block(~ ~-0.1 ~ #death)){die()}
+    
+    effect(give, @s, night_vision, 255, 255, true)
+    effect(give, @s, saturation, 255, 255, true)
+}
+
+events.oninventorychanged{
+    if (Started && entity.adventure()){
+        forgenerate($i,0,26){
+            inventory.setslot(inventory.$i, air)
+        }
+        inventory.sethotbarrange(0,3,air)
+        inventory.sethotbarrange(5,6,air)
+        if (inventory.isholdingitemoffhand(carrot_on_a_stick)){
+            inventory.setoffhand(air)
+        }
+    }
+}

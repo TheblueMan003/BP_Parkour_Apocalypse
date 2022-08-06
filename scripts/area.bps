@@ -1,0 +1,43 @@
+package area
+
+cprocess rocketgive{
+    INT Count
+    def main(){
+        with(@a,true,count!=null){
+            if(Count < 10){
+                Count ++
+                switch(Count){
+                    forgenerate($i,1,10){
+                        $i -> inventory.setoffhand(minecraft:firework_rocket, $i)
+                    }
+                }
+                sound.pitched(minecraft:block.note_block.bell,1,count,10,1)
+            }
+            else{
+                Count = null
+                rocketgive.stop()
+            }
+        }
+    }
+    def onstop(){
+    }
+    def onStart(){
+        Count = 0
+    }
+}
+
+room rocket = room(7,70,60,189,124,146)
+rocket.onEnter{
+    rocketgive.start()
+}
+room end = room(60,11,-528,76,37,-320)
+end.onEnter{
+    /execute in minecraft:overworld run tp @s 920.51 10.00 -0.46 269.74 -3.99
+    parkour.unsafe = false
+    clear(firework_rocket)
+    elytra.rm_elytra()
+    music.stop()
+}
+def goStart(){
+    /execute in minecraft:overworld run tp @s -98.68 243.00 -285.54 -270.25 -1.07
+}

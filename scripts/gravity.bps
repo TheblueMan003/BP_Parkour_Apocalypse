@@ -1,0 +1,129 @@
+package gravity
+
+blocktags air{
+    air,
+    dead_tube_coral_wall_fan,
+    dead_brain_coral_wall_fan,
+    lever,
+    light,
+    ladder,
+    moving_piston
+}
+blocktags clearblock{
+    gray_concrete,
+    polished_andesite,
+    diamond_block,
+    light_blue_concrete,
+    light_blue_concrete_powder,
+    pink_stained_glass,
+    yellow_concrete,
+    yellow_concrete_powder,
+    lime_concrete,
+    lime_concrete_powder,
+    smooth_quartz_stairs,
+    red_concrete,
+    red_concrete_powder,
+    orange_concrete,
+    orange_concrete_powder
+}
+BOOL Reversed
+INT ReversedTime
+INT LevitationTime
+def ticking main(){
+    with(@e[type=item],true){
+        @itemtick()
+        if (@s[tag=!keep]){
+            kill()
+        }
+    }
+}
+def @playertick(){
+    effect.night_vision()
+    effect.saturation()
+    LevitationTime--
+    
+    if (block(~ ~2 ~ barrier) && Reversed && entity.adventure()){
+        kill()
+        parkour.Time.addDeath()
+    }
+    
+    /xp set @s 0 points
+    /xp set @a 0 levels
+    input.ondie{
+        gravity.gravitydownward()
+    }
+    if (LevitationTime <= 0){
+        if (Reversed && !block(~ ~ ~ ladder) && !block(~ ~1 ~ ladder)){
+            ReversedTime++
+            switch(ReversedTime){
+                0..10 -> effect.levitation(1,10,true)
+                11..20 -> effect.levitation(1,20,true)
+                21..30 -> effect.levitation(1,30,true)
+                31..40 -> effect.levitation(1,40,true)
+                41..50 -> effect.levitation(1,50,true)
+                51.. -> effect.levitation(1,60,true)
+            }
+            forgenerate($i,-0.2,0.2,0.2){
+                forgenerate($j,-0.2,0.2,0.2){
+                    if (!block(~$i ~2 ~$j #air)){
+                        if (ReversedTime > 10){
+                            effect.clearlevitation()
+                        }
+                        ReversedTime = 0
+                    }
+                }
+            }
+        }
+        else if (ReversedTime != 0){
+            effect.clearlevitation()
+            ReversedTime = 0
+        }
+    }
+    
+    effect_block.effectblockfun(#clearblock){
+        LevitationTime = 0
+    }
+    if (ReversedTime > 0){
+        effect_block.effectblockheadfun(gray_glazed_terracotta){
+            levitation(5, 5)
+        }
+    }
+    input.ondie{
+        gravityDownward()
+    }
+}
+lazy levitation(int $time, int $power){
+    if (ReversedTime > 0){
+        effect.clearlevitation()
+        ReversedTime = 0
+    }
+    effect.levitation($time, $power,true)
+    LevitationTime = $eval($time*20)
+}
+def clearlevitation(){
+    if (LevitationTime > 0){
+        LevitationTime = 0
+        effect.clearlevitation()
+    }
+}
+def gravityUpward(){
+    if (!Reversed){
+        Reversed = true
+        sound.play(minecraft:block.enchantment_table.use,1,2)
+    }
+}
+def gravityDownward(){
+    if (Reversed){
+        Reversed = false
+        ReversedTime = 0
+        sound.play(minecraft:block.enchantment_table.use,1,0)
+        effect.clearlevitation()
+    }
+}
+
+events.onenterblock(dead_tube_coral_wall_fan){
+    gravityUpward()
+}
+events.onenterblock(dead_brain_coral_wall_fan){
+    gravityDownward()
+}

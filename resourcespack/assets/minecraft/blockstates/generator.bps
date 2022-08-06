@@ -1,0 +1,13 @@
+customblock.add(warped_button, "powered=true,facing=north,face=floor", folding_chair1, "custom/folding_chair",0)
+customblock.add(warped_button, "powered=true,facing=east,face=floor", folding_chair2, "custom/folding_chair",90)
+customblock.add(warped_button, "powered=true,facing=south,face=floor", folding_chair3, "custom/folding_chair",180)
+customblock.add(warped_button, "powered=true,facing=west,face=floor", folding_chair4, "custom/folding_chair",270)
+customblock.generate(warped_button)
+
+customblock.add(acacia_button, "powered=true,facing=north,face=floor", paper_stack, "custom/paper_stack")
+customblock.add(acacia_button, "powered=true,facing=south,face=floor", book_stack, "custom/book_stack")
+customblock.add(acacia_button, "powered=true,facing=east,face=floor", projector_table, "custom/projector_table")
+customblock.generate(acacia_button)
+
+customblock.add(dead_tube_coral, "", a, "custom/flower_pot")
+customblock.generate(dead_tube_coral)

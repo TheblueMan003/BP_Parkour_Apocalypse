@@ -1,0 +1,140 @@
+package room_red
+
+level l1{
+    def oninit(){
+        setup(-1307,174,-1213,-1256,206,-1235)
+    }
+    def onstart(){
+        positioned(-1280 191 -1228){platform.summonbigplatform1()}
+        
+        positioned(-1274 191 -1218){platform.summonbigplatform1()}
+        positioned(-1269 191 -1218){platform.summonbigplatform1()}
+        
+        circle.summon(-1271,192,-1213,0)
+        circle.summon(-1280,192,-1234,0)
+        circle.addtag(red1)
+        platform.tagptf(red1)
+    }
+    
+    def onstop(){
+        circle.remove(red1)
+        platform.clearptf(red1)
+    }
+}
+
+level l2{
+    def oninit(){
+        setup(-1258,178,-1198,-1220,252,-1271)
+    }
+    def onstart(){
+        positioned(-1239 231 -1261){platform.summonbigplatform1()}
+        circle.summon(-1234,188,-1225,0)
+        circle.summon(-1241,188,-1237,0)
+        circle.addtag(red2)
+        platform.tagptf(red2)
+    }
+    def onstop(){
+        circle.remove(red2)
+        platform.clearptf(red2)
+    }
+}
+
+
+level l3{
+    def oninit(){
+        setup(-1250,227,-1268,-1220,320,-1308)
+    }
+    def onstart(){
+        positioned(-1246 231 -1282){platform.summonbigplatform1()}
+        positioned(-1238 231 -1290){platform.summonbigplatform1()}
+        positioned(-1238 231 -1296){platform.summonbigplatform1()}
+        positioned(-1246 231 -1304){platform.summonbigplatform1()}
+        wind.summon(-1234,229,-1293)
+        circle.summon(-1242,232,-1300,0)
+        circle.summon(-1242,232,-1286)
+        wind.addtag(red3)
+        circle.addtag(red3)
+        platform.tagptf(red3)
+    }
+    def onstop(){
+        wind.remove(red3)
+        circle.remove(red3)
+        platform.clearptf(red3)
+    }
+}
+
+
+level l4{
+    def main(){
+        
+    }
+    def onEnter(){
+        music.playskyland()
+    }
+    def onstart(){
+        chunk.waitforall((-1196, 152, -1301),(-1224, 169, -1311)){
+            schedule.add(40){
+                positioned(-1196 152 -1301){platform.summonbigplatform1()}
+                positioned(-1224 169 -1311){platform.summonbigplatform1()}
+                platform.tagptf(red4)
+            }
+        }
+    }
+    def onstop(){
+        platform.clearptf(red4)
+    }
+    def oninit(){
+        setup(-1236,181,-1318,-1183,144,-1289)
+    }
+}
+
+level l5{
+    def main(){
+        
+    }
+    def onstart(){
+        positioned(-1298 169 -1312){platform.summonbigplatform1()}
+        positioned(-1312 169 -1292){platform.summonbigplatform1()}
+        positioned(-1310 169 -1281){platform.summonbigplatform1()}
+        platform.tagptf(red5)
+    }
+    def onstop(){
+        platform.clearptf(red5)
+    }
+    def oninit(){
+        setup(-1287,162,-1326,-1325,193,-1263)
+    }
+}
+
+level l6{
+    def oninit(){
+        setup(-1292,252,-1327,-1217,223,-1304)
+    }
+    def onstart(){
+        positioned(-1249 231 -1318){platform.summonbigplatform1()}
+        positioned(-1262 230 -1310){platform.summonbigplatform1()}
+        positioned(-1276 231 -1318){platform.summonbigplatform1()}
+        wind.summon(-1256,218,-1314)
+        wind.summon(-1268,223,-1314)
+        wind.summon(-1281,227,-1316)
+        wind.addtag(red6)
+        platform.tagptf(red6)
+    }
+    def onstop(){
+        wind.remove(red6)
+        platform.clearptf(red6)
+    }
+}
+
+level l7{
+    def oninit(){
+        setup(-1322,252,-1306,-1290,221,-1325)
+    }
+    def onstart(){
+        wind.summon(-1305,225,-1316)
+        wind.addtag(red7)
+    }
+    def onstop(){
+        wind.remove(red7)
+    }
+}

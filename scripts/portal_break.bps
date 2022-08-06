@@ -1,0 +1,110 @@
+package portal_break
+
+def fakeexplosion(){
+    particles.point(minecraft:explosion_emitter)
+    at(@s){
+        sound.play(minecraft:entity.generic.explode)
+    }
+}
+room rm = room(-1377,294,-1232,-1385,274,-1257)
+rm.onEnter{
+    if (entity.adventure()){
+        main.start()
+        music.stop()
+    }
+}
+
+cprocess main{
+    FLOAT Time
+    def main(){
+        with(@a[tag=portalAnim],true){
+            if (Time < 200){
+                animation.bezier(Time, 200, -1366.62,282.49,-1244.96,449.25,-1.07,-1361.33,282.49,-1244.97,449.25,-1.07,-1356.39,282.49,-1244.98,449.25,-1.07){
+                }
+            }
+            Time++
+            if (Time == 20.0){
+                positioned(-1415 267 -1275){
+                    /summon lightning_bolt
+                }
+            }
+            if (Time == 60.0){
+                positioned(-1492 177 -1089){
+                    /summon lightning_bolt
+                }
+            }
+            if (Time == 80.0){
+                positioned(-1373 274 -1258){
+                    /summon lightning_bolt
+                }
+            }
+            if (Time == 90.0){
+                positioned(-1378 273 -1231){
+                    /summon lightning_bolt
+                }
+            }
+            if (Time == 100.0){
+                positioned(-1379 279 -1251){
+                    /summon lightning_bolt
+                }
+            }
+            if (Time == 130.0){
+                positioned(-1380 282 -1247){
+                    fakeexplosion()
+                }
+            }
+            if (Time == 150.0){
+                positioned(-1380 286 -1242){
+                    fakeexplosion()
+                }
+            }
+            if (Time == 160.0){
+                positioned(-1380 283 -1245){
+                    fakeexplosion()
+                }
+            }
+            if (Time == 170.0){
+                positioned(-1380 285 -1248){
+                    fakeexplosion()
+                }
+            }
+            if (Time == 175.0){
+                positioned(-1380 281 -1243){
+                    fakeexplosion()
+                }
+            }
+            if (Time == 180.0){
+                positioned(-1380 280 -1247){
+                    fakeexplosion()
+                }
+                //fade.toblack(20,40,0)
+            }
+            if (Time == 200.0){
+                /execute in minecraft:overworld run tp @s -992.34 63.00 1000.68 -88.91 8.00
+                gamemode(adventure)
+            }
+            if (Time == 240.0){
+                chunk.waitfor(-993,63,1000){
+                    with(@a[tag=portalAnim],true){
+                        stop()
+                    }
+                }
+            }
+        }
+    }
+    def onstop(){
+        untag(portalAnim)
+        at(@s){
+            parkour.timershow()
+            shader.apply()
+        }
+    }
+    def onstart(){
+        Time = 0
+        parkour.timerhide()
+        parkour.Time.pause()
+        tag(cutscene)
+        tag(portalAnim)
+        gamemode(spectator)
+    }
+}

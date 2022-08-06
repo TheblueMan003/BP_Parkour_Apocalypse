@@ -1,0 +1,194 @@
+package windsection
+
+def lazy megadoor(int $x, int $y, int $z){
+    int step
+    step := 0
+    step++
+    if (step % 4 == 0){
+        positioned($x $y $z){
+            switch((step / 4) % 13){
+                0 -> structure("alpha_door_0")
+                1 -> structure("alpha_door_1")
+                2 -> structure("alpha_door_2")
+                3 -> structure("alpha_door_3")
+                4 -> structure("alpha_door_4")
+                5 -> structure("alpha_door_5")
+                6 -> structure("alpha_door_6")
+                7 -> structure("alpha_door_5")
+                8 -> structure("alpha_door_4")
+                9 -> structure("alpha_door_3")
+                10 -> structure("alpha_door_2")
+                11 -> structure("alpha_door_1")
+                12 -> structure("alpha_door_0")
+            }
+        }
+    }
+}
+
+level l1{
+    def main(){
+    }
+    def onEnter(){
+        music.playcave()
+    }
+    def onStart(){
+        wind.summon(1539,34,58)
+        wind.summon(1541,34,65)
+        wind.summon(1538,34,71)
+        wind.summon(1537,34,77)
+        wind.summon(1540,34,105)
+        wind.addtag(w1)
+    }
+    def onStop(){
+        wind.remove(w1)
+    }
+    def onInit(){
+        setup(1532,34,-20,1546,63,120)
+    }
+}
+
+level l2{
+    def main(){
+    }
+    def onStart(){
+        wind.summon(1539,31,125)
+        wind.summon(1537,30,131)
+        wind.summon(1534,34,135)
+        wind.summon(1534,34,140)
+        wind.summon(1536,34,154)
+        wind.summon(1535,34,159)
+        wind.addtag(w2)
+    }
+    def onStop(){
+        wind.remove(w2)
+    }
+    def onInit(){
+        setup(1532,34,107,1547,62,188)
+    }
+}
+
+
+level l3{
+    def main(){
+        megadoor(1533,34,188)
+        megadoor(1533,34,198)
+        megadoor(1533,34,208)
+        megadoor(1533,34,218)
+    }
+    def onStart(){
+        wind.summon(1539,34,183)
+        wind.summon(1539,34,191)
+        wind.summon(1539,34,195)
+        wind.summon(1539,34,215)
+        wind.addtag(w3)
+    }
+    def onStop(){
+        wind.remove(w3)
+    }
+    def onInit(){
+        setup(1532,34,235,1547,68,171)
+    }
+}
+
+level l4{
+    def main(){
+    
+    }
+    def onenter(){
+        music.playvenise()
+    }
+    def onstart(){
+        wind.summon(1560,62,282)
+        wind.summon(1576,62,282)
+        wind.summon(1593,62,282)
+        wind.addtag(w4)
+    }
+    def onstop(){
+        wind.remove(w4)
+    }
+    def oninit(){
+        setup(1529,61,293,1602,100,257)
+    }
+}
+
+level l5{
+    def main(){
+    
+    }
+    def onstart(){
+        circle.summon(1627,72,282,0)
+        circle.addtag(w5)
+        wind.addtag(w5)
+    }
+    def onstop(){
+        wind.remove(w5)
+        circle.remove(w5)
+    }
+    def oninit(){
+        setup(1601,61,293,1652,100,257)
+    }
+}
+
+
+level l6{
+    def main(){
+    
+    }
+    def onstart(){
+        circle.summon(1709,75,280,0)
+        circle.summon(1692,75,276,0)
+        
+        circle.summon(1729,75,285,20)
+        circle.summon(1733,75,285,10)
+        circle.summon(1737,75,285,0)
+        circle.addtag(w6)
+        wind.addtag(w6)
+    }
+    def onstop(){
+        wind.remove(w6)
+        circle.remove(w6)
+    }
+    def oninit(){
+        setup(1679,61,294,1749,100,257)
+    }
+}
+
+level l7{
+    def main(){
+    
+    }
+    def onstart(){
+        wind.summon(1783,62,282)
+        circle.addtag(w7)
+        wind.addtag(w7)
+    }
+    def onstop(){
+        wind.remove(w7)
+        circle.remove(w7)
+    }
+    def oninit(){
+        setup(1740,61,294,1792,100,257)
+    }
+}
+
+level l8{
+    def main(){
+    
+    }
+    def onstart(){
+        wind.summon(1801,62,282)
+        wind.summon(1819,62,282)
+        circle.summon(1799,78,291,0)
+        circle.summon(1808,78,282,0)
+        circle.summon(1829,78,282,0)
+        circle.addtag(w8)
+        wind.addtag(w8)
+    }
+    def onstop(){
+        wind.remove(w8)
+        circle.remove(w8)
+    }
+    def oninit(){
+        setup(1784,61,294,1841,100,257)
+    }
+}

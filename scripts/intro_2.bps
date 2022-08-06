@@ -1,0 +1,88 @@
+package intro_2
+
+npc yellow
+
+def stop(){
+    yellow = null
+}
+
+def initCharacter(){
+    positioned(617 -39 84){
+        yellow = npc(charcoal)
+        yellow.disableoptimization()
+        yellow.setanimations(animationset.use_computer())
+        yellow.setanimation{
+            /tp @s ~ ~ ~ 90 0
+            tag(yellow)
+            yellow.update()
+        }
+    }
+    positioned(615 -36 84){
+        entity.summon(armor_stand,{Invisible:1,Marker:1,Tags:["pa.screen"],Rotation:[-90f,0f]}){
+            armor_stand.setmodel(scute,10)
+        }
+    }
+    positioned(617,-36,87){
+        entity.summon(armor_stand,{Invisible:1,Marker:1,Tags:["pa.screen"],Rotation:[-135f,0f]}){
+            armor_stand.setmodel(scute,10)
+        }
+    }
+    positioned(617,-36,81){
+        entity.summon(armor_stand,{Invisible:1,Marker:1,Tags:["pa.screen"],Rotation:[-45f,0f]}){
+            armor_stand.setmodel(scute,10)
+        }
+    }
+}
+def settarget(){
+    with(@e[tag=pa.screen]){
+        armor_stand.setmodel(scute,11)
+    }
+}
+def setwarning(){
+    with(@e[tag=pa.screen]){
+        armor_stand.setmodel(scute,12)
+    }
+    yellow.setanimations(animationset.idle())
+}
+
+
+def start(){
+    forceload(617,-40,84,626,-40,84)
+    fade.toblackforallandthen(1,20,10){
+        /tp @a 626 -39 84
+        chunk.waitforall((617,-40,84),(626,-40,84)){
+            initCharacter()
+            main.start()
+            with(@a,true){
+                dialog.show(intro_10, 5, pass){
+                    schedule.add(60){
+                        fade.toblackforallandthen(10,20,10){
+                            stop()
+                            main.stop()
+                            intro_3.start()
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+process main{
+    def main(){
+        with(@a[tag=cutscene]){
+            /spectate @e[tag=rftc.cam,limit=1] @s
+        }
+    }
+    def onStop(){
+        kill(@e[tag=rftc.cam])
+        kill(@e[tag=pa.screen])
+        forceunload(617,-40,84,626,-40,84)
+    }
+    def onStart(){
+        /summon armor_stand 625 -37 84 {Tags:["rftc.cam"],NoGravity:1,Marker:1,Rotation:[90f,0f]}
+        with(@a,true){
+            tag(@s,cutscene)
+            gamemode(spectator)
+        }
+    }
+}

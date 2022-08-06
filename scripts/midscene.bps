@@ -1,0 +1,133 @@
+package midscene
+
+bool playing
+
+def ask(){
+    playing:=false
+    parkour.time.pause()
+    music.stop()
+    if (!playing){
+        start()
+    }
+    else{
+        wait.start()
+    }
+}
+cprocess wait{
+    def main(){
+        with(@a[tag=waitMidscene]){
+            /execute in minecraft:overworld run tp @s 876.50 -31.18 25.50 177.54 3.85
+            tag(@s,cutscene)
+            gamemode(spectator)
+            if (!playing){
+                wait.stop()
+                start()
+            }
+        }
+    }
+    def onStart(){
+        tag(waitMidscene)
+    }
+}
+
+
+
+def start(){
+    untag(waitMidscene)
+    forceload(876,-10,25)
+    tag(@s,midlock)
+    playing = true
+    fade.toblackandthen(20,10,10){
+        with(@a[tag=midlock],true){
+            /tp @s 876 -10 25
+            
+            main.start()
+            positioned(876 -10 25){
+                facing(876 -10 26){
+                    /function pa_earth:summon/default
+                }
+                with(@e[tag=pa.earth]){
+                    /function pa_earth:animations/animation.wave.exploding_earth/play
+                }
+            }
+            untag(midlock)
+        }
+    }
+}
+process main{
+    int tick
+    def main(){
+        /function pa_earth:animation_loop
+        if (tick < 0){
+            with(@e[tag=pa.earth]){
+                /function pa_earth:animations/animation.wave.exploding_earth/pause
+            }
+        }
+        if (tick == 0){
+            with(@e[tag=pa.earth]){
+                /function pa_earth:animations/animation.wave.exploding_earth/play
+            }
+        }
+        with(@e[tag=rftc.cam2]){
+            /execute in minecraft:overworld run tp @s 873.88 -6.40 22.69 -42.63 38.93
+        }
+        with(@a[tag=midcutscene],true){
+            /spectate @e[tag=rftc.cam2,limit=1] @s
+            if(tick == 28){
+                fade.towhite(2,5,2)
+                
+            }
+            if (tick == 25){
+                sound.play(sfx.earth_shockwave)
+            }
+            if (tick == 40){
+                sound.play(sfx.earth_explode)
+            }
+            if(tick == 130){
+                fade.toblackandthen(10,20,10)
+            }
+        }
+        with(@e[tag=rftc.shockwave]){
+            switch(tick){
+                18 -> armor_stand.setmodel(scute, 1)
+                20 -> armor_stand.setmodel(scute, 2)
+                22 -> armor_stand.setmodel(scute, 3)
+                24 -> armor_stand.setmodel(scute, 4)
+                26 -> armor_stand.setmodel(scute, 5)
+                28 -> armor_stand.setmodel(scute, 6)
+                30 -> kill()
+            }
+        }
+        tick ++
+        
+        
+        if (tick > 150){
+            stop()
+        }
+    }
+    def onStop(){
+        kill(@e[tag=rftc.cam2])
+        with(@e[tag=pa.earth]){
+            /function pa_earth:remove/this
+        }
+        with(@a[tag=midcutscene]){
+            /tp @s -1188.57 153.00 -1293.75 -182.47 -0.47
+            gamemode(adventure)
+            untag(midcutscene)
+            untag(cutscene)
+        }
+        forceunload(876,-10,25)
+        playing = false
+    }
+    def onStart(){
+        tick = -30
+        /summon armor_stand 871.73 -4.53 20.35 {Tags:["rftc.cam2"],NoGravity:1,Marker:1}
+        /summon armor_stand 876 -9.75 25 {Tags:["rftc.shockwave"],NoGravity:1,Marker:1,Invisible:1}
+        
+        with(@a[tag=midlock],true){
+            tag(@s,cutscene)
+            tag(@s,midcutscene)
+            gamemode(spectator)
+        }
+    }
+}

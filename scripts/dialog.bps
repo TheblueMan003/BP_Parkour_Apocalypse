@@ -1,0 +1,3 @@
+package dialog
+
+betterdialog.generate(40,"dialog_en")

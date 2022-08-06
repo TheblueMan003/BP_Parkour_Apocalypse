@@ -1,0 +1,3 @@
+id;value
+language_set;((""),("Language set to English."))
+particles;((""),("Warning: ",red),("Particles must be activated!",red))

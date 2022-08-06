@@ -1,0 +1,167 @@
+package lab_1
+
+level l10{
+    def main(){
+        megadoor(-311,233,-241)
+    }
+    def playertick(){
+        if (room.y < 234){
+            parkour.die()
+        }
+    }
+    def oninit(){
+        setup(-368,257,-219,-292,232,-256)
+    }
+    def onStart(){
+        schedule.add(10){
+            circle.summon(-346,242,-234)
+            circle.summon(-329,242,-244)
+            circle.addtag(l10)
+        }
+    
+        schedule.add(30){
+            positioned(-354 233 -247){
+                explosion()
+            }
+        }
+        schedule.add(60){
+            positioned(-343 233 -231){
+                explosion()
+            }
+        }
+        schedule.add(100){
+            positioned(-334 233 -246){
+                explosion()
+            }
+        }
+        schedule.add(140){
+            positioned(-322 233 -229){
+                explosion()
+            }
+        }
+    }
+    def onStop(){
+        /fill -368 232 -256 -312 245 -218 air replace fire
+        circle.remove(l10)
+    }
+}
+
+level l11{
+    def main(){
+        megadoor(-253,233,-241)
+    }
+    def playertick(){
+        if (room.y < 234){
+            parkour.die()
+        }
+    }
+    def oninit(){
+        setup(-310,232,-257,-240,259,-219)
+    }
+    def onStart(){
+        circle.summon(-289 242 -237)
+        circle.summon(-264 242 -237)
+        circle.addtag(l11)
+    
+        schedule.add(30){
+            positioned(-296 233 -245){
+                explosion()
+            }
+        }
+        schedule.add(60){
+            positioned(-287 233 -230){
+                explosion()
+            }
+        }
+        schedule.add(100){
+            positioned(-281 233 -243){
+                explosion()
+            }
+        }
+        schedule.add(140){
+            positioned(-272 233 -237){
+                explosion()
+            }
+        }
+        schedule.add(170){
+            positioned(-263 233 -230){
+                explosion()
+            }
+        }
+    }
+    def onStop(){
+        /fill -310 232 -257 -254 244 -219 air replace fire
+        circle.remove(l11)
+    }
+}
+
+level l12{
+    def main(){
+        megadoor(-195,233,-241)
+    }
+    def playertick(){
+        if (room.y < 234){
+            parkour.die()
+        }
+    }
+    def oninit(){
+        setup(-253,232,-256,-165,258,-219)
+    }
+    def onStart(){
+        circle.summon(-222,242,-236)
+        circle.summon(-203,247,-234)
+        circle.addtag(l12)
+    
+        schedule.add(30){
+            positioned(-241 233 -246){
+                explosion()
+            }
+        }
+        schedule.add(60){
+            positioned(-225 233 -227){
+                explosion()
+            }
+        }
+        schedule.add(100){
+            positioned(-220 233 -242){
+                explosion()
+            }
+        }
+        schedule.add(140){
+            positioned(-212 233 -228){
+                explosion()
+            }
+        }
+        schedule.add(170){
+            positioned(-204 233 -243){
+                explosion()
+            }
+        }
+    }
+    def onStop(){
+        /fill -253 232 -256 -205 245 -219 air replace fire
+        /fill -205 232 -256 -165 245 -219 air replace fire
+        circle.remove(l12)
+    }
+}
+
+level l13{
+    def oninit(){
+        setup(-165,243,-238,-155,250,-208)
+    }
+    def onStart(){
+        schedule.add(30){
+            positioned(-156 243 -230){
+                explosion()
+            }
+        }
+        schedule.add(60){
+            positioned(-164 243 -222){
+                explosion()
+            }
+        }
+    }
+    def onStop(){
+        /fill -165 243 -240 -155 250 -208 air replace fire
+    }
+}

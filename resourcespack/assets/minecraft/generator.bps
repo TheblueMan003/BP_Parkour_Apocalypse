@@ -1,0 +1,5 @@
+sounds.add("sfx/earth_explode")
+sounds.add("sfx/earth_shockwave")
+sounds.add("sfx/phone")
+music.addallmusic()
+sounds.generate()

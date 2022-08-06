@@ -1,0 +1,3 @@
+package speedrun
+
+speedrun.init(55)

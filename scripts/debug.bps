@@ -1,0 +1,10 @@
+package debug
+
+
+process tools2{
+    def main(){
+        with(@e[tag=ptf_model],true){
+            /setblock ~ ~-1 ~ tripwire
+        }
+    }
+}

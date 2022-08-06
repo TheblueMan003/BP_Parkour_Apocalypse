@@ -1,0 +1,24 @@
+package hub
+
+def screen(){
+    screen.summon(home,leaderboard,credit,setting){
+        intro_1.start()
+    }
+}
+
+def ticking main(){
+    screen.screen_tick()
+}
+
+def join(){
+    /execute in minecraft:overworld run tp @s -10.47 256.00 -143.64 -900.80 -2.15
+    at(@a){
+        spawnpoint()
+    }
+    gamemode(adventure)
+    screen.addcontroll()
+}
+
+def @playerinit(){
+    join()
+}

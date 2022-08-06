@@ -1,0 +1,61 @@
+package recap
+
+
+INT Rank
+
+def show_recap(){
+    int time = parkour.Time.getTime()
+    int death = parkour.Time.death
+    int style
+    if (parkour.RealTime/90 < 500){
+        style = 100
+    }
+    else{
+        style = 100-(parkour.RealTime/49 - 500)
+    }
+    style -= (death+1)/10
+    if (style < 0){
+        style = 0
+    }
+    int rank1 = slop(18000, 5000, time)
+    int rank2 = slop(1, 25, death)
+    int rank3 = slop2(100, 10, style)
+    
+    Rank = rank1 + rank2 + rank3
+    Rank /= 3
+    
+    tag(cutscene)
+    recap.show(-6,265,-194,time,death,style,rank1,rank2,rank3){
+        parkour.submit()
+        /title @s times 20 60 20
+        title(@s,title,("\uE200", font="pg"))
+        hub.join()
+        untag(cutscene)
+        clear()
+    }
+}
+
+int slop(int s, int delta, int value){
+    if (value < s){
+        return 5
+    }
+    else{
+        int ret = 5 - ((value - s)/delta)-1
+        if (ret < 0){
+            ret = 0
+        }
+        return ret
+    }
+}
+int slop2(int s, int delta, int value){
+    if (value >= s){
+        return 5
+    }
+    else{
+        int ret = 5 - ((s-value)/delta)-1
+        if (ret < 0){
+            ret = 0
+        }
+        return ret
+    }
+}

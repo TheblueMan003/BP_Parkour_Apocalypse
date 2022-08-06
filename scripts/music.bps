@@ -1,0 +1,8 @@
+package music
+
+music.addmusic(cave, minecraft:music.cave, 1,43)
+music.addmusic(elytra, minecraft:music.elytra, 3,35)
+music.addmusic(intro, intro_0,intro_1,minecraft:music.intro_0, minecraft:music.intro_1, 780, 520)
+music.addmusic(skyland, minecraft:music.skyland, 1,52)
+music.addmusic(venise, minecraft:music.venise, 1,35)
+music.addmusic(void, minecraft:music.void, 1,58)

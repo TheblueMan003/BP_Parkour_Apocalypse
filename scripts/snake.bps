@@ -1,0 +1,7 @@
+package snake
+
+RedSpeed = 15
+RedLength = 30
+
+GreenSpeed = 8
+GreenLength = 30

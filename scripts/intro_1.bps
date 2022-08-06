@@ -1,0 +1,133 @@
+package intro_1
+
+npc npc_0, yellow, sciguy
+
+def stop(){
+    npc_0, yellow, sciguy = null
+}
+
+def initCharacter(){
+    chunk.waitfor(681 -39 83){
+        positioned(681 -39 83){
+            npc_0 = npc(copper_ingot)
+            npc_0.disableoptimization()
+            npc_0.setanimation{
+                /tp @s ~ ~ ~ 90 0
+                npc_0.update()
+            }
+        }
+    }
+    chunk.waitfor(678 -39 83){
+        positioned(678 -39 83){
+            yellow = npc(charcoal)
+            yellow.disableoptimization()
+            yellow.setanimations(animationset.talking())
+            yellow.setanimation{
+                /tp @s ~ ~ ~ -90 0
+                tag(yellow)
+                yellow.update()
+            }
+        }
+    }
+    chunk.waitfor(666 -39 83){
+        positioned(666 -39 83){
+            sciguy = npc(stick)
+            sciguy.disableoptimization()
+            sciguy.setanimations(animationset.walk())
+            sciguy.setanimation{
+                INT delta
+                delta ++
+                if (delta > 20){
+                    /tp @s ~0.1 ~ ~ -90 0
+                }
+                else if (delta < 10){
+                    /tp @s ~ ~ ~ -90 0
+                }
+                int x = @s.x
+                if (x == 675){
+                    part2()
+                }
+                sciguy.update()
+            }
+        }
+    }
+}
+int playCutscene:=false
+def @reset(){
+    playCutscene = false
+}
+int @test intro_playable(){
+    if (playCutscene){
+        return 0
+    }
+    else{
+        return 1
+    }
+}
+def start(){
+    if (!playCutscene){
+        playCutscene = true
+        forceload(678,79,677,82)
+        fade.toblackforallandthen(20,10,10){
+            /tp @a 677 -39 79
+            chunk.waitforall((678,0,79),(677,0,82)){
+                schedule.add(40){
+                    initCharacter()
+                    main.start()
+                }
+            }
+        }
+    }
+    else{
+        /execute in minecraft:overworld run tp @s -98.43 243.00 -285.44 -269.22 4.46
+        gamemode(adventure)
+        untag(cutscene)
+        parkour.start()
+    }
+}
+def part2(){
+    sciguy.setanimation{
+        facing(@e[tag=yellow,limit=1]){
+            /tp @s ~ ~ ~ ~ ~
+        }
+        sciguy.update()
+    }
+    yellow.setanimation{
+        /tp @s ~ ~ ~ 90 0
+        yellow.update()
+    }
+    with(@a,true){
+        dialog.show(intro_0, 9, pass){
+            fade.toblackforallandthen(){
+                stop()
+                main.stop()
+                intro_2.start()
+            }
+        }
+    }
+}
+def part3(){
+    yellow.setanimation{
+        /tp @s ~-0.1 ~ ~0.0125 90 0
+        yellow.update()
+    }
+    yellow.setanimations(animationset.walk())
+}
+process main{
+    def main(){
+        with(@a[tag=cutscene]){
+            /spectate @e[tag=rftc.cam,limit=1] @s
+        }
+    }
+    def onStop(){
+        kill(@e[tag=rftc.cam])
+        forceunload(678,79,677,82)
+    }
+    def onStart(){
+        /summon armor_stand 677 -38 78 {Tags:["rftc.cam"],NoGravity:1,Marker:1}
+        with(@a,true){
+            tag(@s,cutscene)
+            gamemode(spectator)
+        }
+    }
+}

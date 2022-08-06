@@ -1,0 +1,32 @@
+package beat_room
+
+//room.beat_block(bt_1, 1027 67 -4 1060 70 3, 1022 67 -5 1064 83 5)
+//room.beat_block(bt_2, 1081 69 3 1107 72 -3, 1060 66 7 1109 85 -5)
+//room.beat_block(bt_3, 1133 75 3 1166 68 -3, 1119 79 -6 1169 67 8)
+//room.beat_block(bt_4, 1242 78 3 1266 70 -5, 1225 85 4 1270 69 -6)
+//room.beat_block(bt_5, 1302 72 2 1353 74 -2, 1298 68 7 1355 82 -4)
+
+//room.beat_block(bt_6, 1417 75 -2 1466 82 2, 1411 73 -7 1468 89 5)
+//room.beat_block(bt_7, 1538 41 37 1539 42 46, 1535 46 20 1545 38 49)
+//room.beat_block(bt_8, 1539 41 180 1537 42 211, 1543 38 173 1533 50 218)
+//room.beat_block(bt_9, 1881 71 280 1895 72 279, 1897 81 275 1837 69 289)
+
+room explode = room(1933,92,288,1972,65,274)
+explode.onEnter{
+    midscene.ask()
+}
+
+level snakecirle1{
+    def oninit(){
+        setup(1223,65,-10,1297,95,16)
+    }
+    def onstart(){
+        circle.summon(1245,76,4)
+        circle.summon(1263,76,0)
+        circle.summon(1281,76,5)
+        circle.addtag(sc1)
+    }
+    def onstop(){
+        circle.remove(sc1)
+    }
+}

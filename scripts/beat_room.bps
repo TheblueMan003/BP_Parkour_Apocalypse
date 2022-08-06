@@ -1,0 +1,136 @@
+//package room
+//
+//int tick
+//int scale = 1
+//
+//def @playertick(){
+//    if (entity.adventure() && tag(beat)){
+//        forgenerate($b,(magenta_stained_glass,blue_stained_glass)){
+//            forgenerate($i,-1,1){
+//                forgenerate($j,-1,1){
+//                    align(xyz){
+//                        positioned(~$i ~-1 ~$j){
+//                            positioned(~0.5 ~ ~0.5){
+//                                if (block(~ ~ ~ $b)){
+//                                    setblock(air)
+//                                    define int $tag = regex($b, "_stained_glass", "")
+//                                    
+//                                    falling_block.summonmovable($b){
+//                                        tag($tag)
+//                                        tag(fake_block)
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}
+//def ticking main(){
+//    with(@e[tag=fake_block],true){
+//        if (!@p[distance=..3]){
+//            if (@s[tag=magenta]){
+//                if (room.tick < 20*scale){
+//                    setblock(~ ~ ~ magenta_concrete)
+//                }
+//                if (room.tick >= 20*scale){
+//                    setblock(~ ~ ~ magenta_stained_glass)
+//                }
+//            }
+//            if (@s[tag=blue]){
+//                if (room.tick < 20*scale){
+//                    setblock(~ ~ ~ blue_stained_glass)
+//                }
+//                if (room.tick >= 20*scale){
+//                    setblock(~ ~ ~ blue_concrete)
+//                }
+//            }
+//            int y = @s.y
+//            if (y < 0){
+//                kill()
+//            }
+//            /tp @s ~ -3 ~
+//            data.set({NoGravity:0b,Marker:0b})
+//        }
+//    }
+//}
+//
+//
+//def ticking beat_block_tick(){
+//    tick ++
+//    if (tick >= 40*scale){
+//        tick = 0
+//    }
+//}
+//
+//
+//def @playertick(){
+//    at(@s){
+//        if (tick == 5*scale){
+//            /playsound minecraft:block.note_block.bit master @s[tag=beat] ~ ~ ~ 0.25 1.1
+//        }
+//        if (tick == 10*scale){
+//            /playsound minecraft:block.note_block.bit master @s[tag=beat] ~ ~ ~ 0.25 1.3
+//        }
+//        if (tick == 15*scale){
+//            /playsound minecraft:block.note_block.bit master @s[tag=beat] ~ ~ ~ 0.25 1.5
+//        }
+//        if (tick == 20*scale){
+//            /playsound minecraft:block.note_block.bell master @s[tag=beat] ~ ~ ~ 1 2
+//        }
+//        if (tick == 25*scale){
+//            /playsound minecraft:block.note_block.bit master @s[tag=beat] ~ ~ ~ 0.25 1.1
+//        }
+//        if (tick == 30*scale){
+//            /playsound minecraft:block.note_block.bit master @s[tag=beat] ~ ~ ~ 0.25 1.3
+//        }
+//        if (tick == 35*scale){
+//            /playsound minecraft:block.note_block.bit master @s[tag=beat] ~ ~ ~ 0.25 1.5
+//        }
+//        if (tick == 0*scale){
+//            /playsound minecraft:block.note_block.bell master @s[tag=beat] ~ ~ ~ 1 2
+//        }
+//    }
+//}
+//
+//def lazy beat_block(string $name, string $area, string $tickarea){
+//    def beat_block_$name_set_on(){
+//        /fill $area blue_stained_glass replace blue_concrete
+//        /fill $area magenta_concrete replace magenta_stained_glass
+//    }
+//    def beat_block_$name_set_off(){
+//        /fill $area blue_concrete replace blue_stained_glass
+//        /fill $area magenta_stained_glass replace magenta_concrete
+//    }
+//    def beat_block_$name_tick(){
+//        tag(beat)
+//        if (tick == 0*scale){
+//            beat_block_$name_set_on()
+//        }
+//        if (tick == 20*scale){
+//            beat_block_$name_set_off()
+//        }
+//    }
+//    def beat_block_$name_enter(){
+//        tag(beat)
+//        if (tick < 20*scale){
+//            beat_block_$name_set_on()
+//        }
+//        if (tick >= 20*scale){
+//            beat_block_$name_set_off()
+//        }
+//    }
+//    def beat_block_$name_quit(){
+//        untag(beat)
+//    }
+//    room beat$nameRoom = room($tickarea)
+//    beat$nameRoom.onEnter(beat_block_$name_enter)
+//    beat$nameRoom.onStay(beat_block_$name_tick)
+//    beat$nameRoom.onExit(beat_block_$name_quit)
+//    beat$nameRoom.setColor(purple)
+//}
+//def lazy beat_block(string $name, string $area){
+//    beat_block($name,$area,$area)
+//}

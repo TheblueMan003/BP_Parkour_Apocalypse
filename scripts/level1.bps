@@ -1,0 +1,65 @@
+package level_animation
+
+def lazy spawndown(int $x, int $y, int $z, int $d){
+    schedule.add($d){
+        positioned($x $eval(0+($y)+20)eval$ $z){
+            moving_structure a = moving_structure("green_platform",30, pass, motion.ysmooth(-20,30))
+            a.start()
+        }
+        positioned($x $eval(0+($y)+10)eval$ $z){
+            particles.sphere(firework, 1, 1, 20)
+            sound.playall(minecraft:entity.zombie.break_wooden_door,1,0)
+        }
+    }
+    positioned($x $y $z){
+        fill(~ ~ ~ ~1 ~1 ~1 air)
+    }
+}
+def lazy spawnlava(int $x, int $y, int $z, int $d){
+    schedule.add($d){
+        positioned($x $eval(0+($y)-10)eval$ $z){
+            moving_structure a = moving_structure("green_platform",30, pass, motion.ysmooth(10,30))
+            a.start()
+        }
+        positioned($x 63 $z){
+            particles.sphere(lava, 1, 0.25, 50)
+            sound.playall(minecraft:block.lava.extinguish,10,1)
+        }
+    }
+    positioned($x $y $z){
+        fill(~ ~ ~ ~1 ~1 ~1 air)
+    }
+}
+
+def level1(){
+    spawndown(-116,242,-286,1)
+    spawndown(-120,243,-286,10)
+    spawndown(-125,243,-287,20)
+    spawndown(-129,243,-286,30)
+    spawndown(-134,243,-286,40)
+    /fill -135 242 -287 -112 242 -285 minecraft:light_gray_concrete
+}
+
+def level01(){
+    spawnlava(996,65,-1,20)
+    spawnlava(1000,66,0,40)
+    spawnlava(1005,66,0,60)
+    spawnlava(1010,66,0,80)
+    spawnlava(1014,67,0,100)
+    spawnlava(1019,68,0,120)
+}
+
+level l1{
+    def onstart(){
+        level1()
+    }
+    def onenter(){
+        music.playintro()
+    }
+    def onstop(){
+        /fill -134 244 -285 -115 243 -287 air
+    }
+    def oninit(){
+        setup(-97,242,-281,-138,247,-291)
+    }
+}

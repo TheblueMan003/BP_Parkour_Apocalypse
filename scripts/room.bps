@@ -1,0 +1,32 @@
+package room
+
+room bigplatform = room(962,12,-2,964,13,0)
+
+bigplatform.onEnter{
+    effect.levitation(5,13,true)
+    parkour_spawnpoint.setspawn(true)
+    music.playvenise()
+}
+
+
+
+level rm{
+    def main(){
+        
+    }
+    def oninit(){
+        setup(989,38,-18,928,9,22)
+    }
+    def onstart(){
+        chunk.waitfor(963,12,-1){
+            schedule.add(40){
+                wind.summon(963,12,-1)
+                wind.addtag(labexit)
+            }
+            /fill 962 65 -2 964 64 0 air
+        }
+    }
+    def onstop(){
+        wind.remove(labexit)
+    }
+}

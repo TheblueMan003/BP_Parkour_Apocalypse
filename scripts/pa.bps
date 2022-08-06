@@ -1,0 +1,18 @@
+package pa
+
+gamerule(showDeathMessages, false)
+gamerule(doWeatherCycle, false)
+gamerule(doImmediateRespawn, true)
+gamerule(doFireTick, false)
+gamerule(doMobSpawning, false)
+gamerule(fallDamage, false)
+gamerule(keepInventory, true)
+gamerule(announceAdvancements, false)
+gamerule(doDaylightCycle, false)
+
+def reset(){
+    @reset()
+}
+
+filter.removeAdvancements()
+filter.removeRecipes()

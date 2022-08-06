@@ -1,0 +1,82 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "custom/book_stack",
+		"particle": "custom/book_stack"
+	},
+	"elements": [
+		{
+			"name": "body",
+			"from": [5, 0, 2],
+			"to": [12, 3, 13],
+			"faces": {
+				"north": {"uv": [10.5, 9, 14, 10.5], "texture": "#0"},
+				"east": {"uv": [10.5, 0, 16, 1.5], "texture": "#0"},
+				"south": {"uv": [10.5, 10.5, 14, 12], "texture": "#0"},
+				"west": {"uv": [10.5, 1.5, 16, 3], "texture": "#0"},
+				"up": {"uv": [3.5, 5.5, 0, 0], "texture": "#0"},
+				"down": {"uv": [7, 0, 3.5, 5.5], "texture": "#0"}
+			}
+		},
+		{
+			"name": "body2",
+			"from": [5, 3, 2],
+			"to": [12, 6, 13],
+			"rotation": {"angle": 22.5, "axis": "y", "origin": [8.5, 4.5, 7.5]},
+			"faces": {
+				"north": {"uv": [0, 11, 3.5, 12.5], "texture": "#0"},
+				"east": {"uv": [10.5, 3, 16, 4.5], "texture": "#0"},
+				"south": {"uv": [3.5, 11, 7, 12.5], "texture": "#0"},
+				"west": {"uv": [10.5, 4.5, 16, 6], "texture": "#0"},
+				"up": {"uv": [3.5, 11, 0, 5.5], "texture": "#0"},
+				"down": {"uv": [7, 5.5, 3.5, 11], "texture": "#0"}
+			}
+		},
+		{
+			"name": "body3",
+			"from": [5, 6, 2],
+			"to": [12, 9, 13],
+			"rotation": {"angle": -22.5, "axis": "y", "origin": [8.5, 7.5, 7.5]},
+			"faces": {
+				"north": {"uv": [7, 11, 10.5, 12.5], "texture": "#0"},
+				"east": {"uv": [10.5, 6, 16, 7.5], "texture": "#0"},
+				"south": {"uv": [10.5, 12, 14, 13.5], "texture": "#0"},
+				"west": {"uv": [10.5, 7.5, 16, 9], "texture": "#0"},
+				"up": {"uv": [10.5, 5.5, 7, 0], "texture": "#0"},
+				"down": {"uv": [10.5, 5.5, 7, 11], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"head": {
+			"translation": [0, -34.25, 0],
+			"scale": [1.1, 1.1, 1.1]
+		}
+	},
+	"groups": [
+		{
+			"name": "body",
+			"origin": [0, 0, 0],
+			"color": 0,
+			"shade": false,
+			"children": [0]
+		},
+		{
+			"name": "body2",
+			"origin": [0, 3, 0],
+			"rotation": [0, 10, 0],
+			"color": 1,
+			"shade": false,
+			"children": [1]
+		},
+		{
+			"name": "body3",
+			"origin": [0, 6, 0],
+			"rotation": [0, -20, 0],
+			"color": 2,
+			"shade": false,
+			"children": [2]
+		}
+	]
+}

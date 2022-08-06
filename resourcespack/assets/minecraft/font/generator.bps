@@ -1,0 +1,2 @@
+font.customaddchar(pg,to_be_continued,"custom/to_be_continued.png",64,"\uE200")
+font.customgenerate(pg)
